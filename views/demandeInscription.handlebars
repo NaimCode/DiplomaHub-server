@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+  <title>Demande d"inscription</title>
+  <style type="text/tailwindcss">
+  @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind components;
+@tailwind utilities;
+@tailwind base;
+@layer components {
+   .text-accent {
+     @apply opacity-50
+   }
+   .titre1{
+     @apply font-corps_1
+   }
+   body,html{
+     @apply bg-background p-0 m-0 !important
+   }
+   p{
+     @apply text-opacity-70 !important
+   }
+   h1{
+     @apply text-5xl font-corps_1 font-bold py-4 !important
+   }
+   h2{
+    @apply text-3xl font-corps_1 font-bold py-2 !important
+  }
+  h3{
+    @apply text-xl font-corps_1 font-semibold py-2 !important
+  }
+  }
+
+body,html{
+    margin: 0cm;
+    padding: 0cm;
+}
+  </style>
+  <script>
+   tailwind.config = {
+     important:true,
+  theme: {
+    extend: {
+      fontFamily: {
+        corps_1: ["Lato", "sans-serif"],
+        corps_2: ["Spartant", "sans-serif"],
+      },
+      colors: {
+        background: "#f5f8fa",
+        darker: "#1D2671",
+        primaire: {
+          vive: "#42a5f5",
+          normal: "#1976d2",
+          foncé: "#1565c0",
+        },
+        secondaire: {
+          vive: "#ba68c8",
+          normal: "#9c27b0",
+          foncé: "#7b1fa2",
+        },
+        accentué: {
+          vive: "#ff9800",
+          normal: "#ed6c02",
+          foncé: "#e65100",
+        },
+      },
+    },
+  },
+  plugins: [],
+  variants: {
+    // ...
+    scale: ["responsive", "hover", "focus", "active", "group-hover"],
+  },
+};
+
+  </script>
+</head>
+<body>
+<div class="flex flex-col items-center justify-center bg-[#f5f8fa] px-3 py-4">
+      <a
+        href="http://localhost:3000"
+        rel="noreferrer"
+        target={"_blank"}
+        class="text-darker text-3xl text-center py-10 font-bold"
+      >
+        Diploma<span class="text-primaire-normal">Hub</span>
+      </a>
+      <div class=" w-full max-w-xl bg-white rounded-md shadow-md flex flex-col p-7 gap-2">
+        <hr class="my-5" />
+
+        <div>
+          <p class="text-sm">Abréviation</p>
+          <strong class="text-lg font-semibold">ISGA</strong>
+        </div>
+        <div>
+          <p class="text-sm">Nom</p>
+          <strong class="text-lg font-semibold">
+            Institut Superieur de gestion
+          </strong>
+        </div>
+        <div>
+          <p class="text-sm">Email</p>
+          <strong class="text-lg font-semibold">naim@gmail.com</strong>
+        </div>
+        <div>
+          <p class="text-sm">Num</p>
+          <strong class="text-lg font-semibold">00212700480681</strong>
+        </div>
+        <div>
+          <p class="text-sm">Site internet</p>
+          <strong class="text-lg font-semibold">naimdev.com</strong>
+        </div>
+        <div>
+          <p class="text-sm">Pays</p>
+          <strong class="text-lg font-semibold">naim@gmail.com</strong>
+        </div>
+        <div>
+          <p class="text-sm">Ville</p>
+          <strong class="text-lg font-semibold">00212700480681</strong>
+        </div>
+        <div>
+          <p class="text-sm">Adresse</p>
+          <strong class="text-lg font-semibold">naimdev.com</strong>
+        </div>
+        <hr class="my-5" />
+        <div class="flex flex-row gap-5 justify-between items-center">
+          <input
+            type="text"
+            name="code"
+            
+            placeholder="mot de passe"
+            class="border-2 border-gray-400 px-3 py-2 rounded-sm w-[140px] text-sm"
+          />
+          <button
+            type="submit"
+            class="w-full bg-[#1976d2] shadow-lg px-3 py-2 text-white uppercase rounded-sm"
+          >
+            Confirmer
+          </button>
+        </div>
+      </div>
+      <p class="pt-5 pb-10 text-opacity-40 text-black/40">10/04/2022</p>
+    </div>
+</body>
+</html>
