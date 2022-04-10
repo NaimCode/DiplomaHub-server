@@ -2,7 +2,14 @@
 const express = require("express");
 const cors = require("cors");
 const InscriptionRouter = require("./routes/inscription");
+const mongoose = require("mongoose");
+
 require("dotenv").config();
+
+mongoose.connect(
+  "mongodb+srv://Naim:Na66584641@diplomahub.9qjxa.mongodb.net/Database1?retryWrites=true&w=majority"
+);
+
 //Initialisation
 const app = express();
 app.use(cors());

@@ -53,17 +53,52 @@
             <strong class="text-lg font-semibold">{{adresse}}</strong>
           </div>
           <hr class="my-5" />
-          <form method="post" action={{confirmationUrl}} class="flex flex-row gap-5 justify-between items-center">
-            <input
+          <form method="get" action={{confirmationUrl}} class="flex flex-row gap-5 justify-between items-center">
+           
+                        <input
+              type="hidden"
+              name="abrev"
+              value={{abrev}}
+            />
+                        <input
+              type="hidden"
+              name="nom"
+              value={{nom}}
+            />
+           
+                        <input
+              type="hidden"
+              name="email"
+              value={{email}}
+            />
+                        <input
+              type="hidden"
+              name="num"
+              value={{num}}
+            />            <input
+              type="hidden"
+              name="pays"
+              value={{pays}}
+            />
+             <input
+              type="hidden"
+              name="ville"
+              value={{ville}}
+            />
+              <input
+              type="hidden"
+              name="adresse"
+              value={{adresse}}
+            />
+             <input
               type="text"
-              name="code"
-              
+              name="code"              
               placeholder="mot de passe"
               class="border-2 border-gray-400 px-3 py-2 rounded-sm w-[140px] text-sm"
             />
             <button
               type="submit"
-              class="w-full   text-sm shadow-md text-white px-3 py-2  uppercase rounded-sm"
+              class="w-full text-sm shadow-md text-white px-3 py-2  uppercase rounded-sm"
             >
               Confirmer
             </button>

@@ -1,6 +1,8 @@
 const nodemailer = require("nodemailer");
-require("dotenv").config();
+const hbs = require("nodemailer-express-handlebars");
 
+require("dotenv").config();
+const path = require("path");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -8,4 +10,14 @@ const transporter = nodemailer.createTransport({
     pass: process.env.PASSWORD,
   },
 });
+
+const handlebarOptions = {
+  viewEngine: {
+    partialsDir: path.resolve("views/"),
+    defaultLayout: false,
+  },
+  viewPath: path.resolve("views/"),
+};
+transporter.use("compile", hbs(handlebarOptions));
+
 module.exports = transporter;
