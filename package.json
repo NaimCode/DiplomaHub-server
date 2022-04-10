@@ -1,7 +1,7 @@
 {
-  "name": "pfa_server",
+  "name": "diplomahub_server",
   "version": "1.0.0",
-  "description": "Le serveur responsable de gerer l'application des certifications numeriques",
+  "description": "Le serveur responsable de gerer l'application diplomahub",
   "main": "app.js",
   "author": "ISGA",
   "license": "MIT",
@@ -13,7 +13,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "dev":"nodemon app.js",
+    "start":"nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": []
