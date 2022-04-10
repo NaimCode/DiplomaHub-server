@@ -1,7 +1,8 @@
 //Importation
 const express = require("express");
 const cors = require("cors");
-
+const InscriptionRouter = require("./routes/inscription");
+require("dotenv").config();
 //Initialisation
 const app = express();
 app.use(cors());
@@ -17,3 +18,6 @@ app.listen(PORT, () =>
 
 //Route par défaut
 app.get("/", (req, res) => res.send("Serveur en marche!"));
+
+//Activation des autres routers
+app.use("/inscription", InscriptionRouter);
