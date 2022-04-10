@@ -1,15 +1,5 @@
 const router = require("express").Router();
-const nodemailer = require("nodemailer");
-require("dotenv").config();
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD,
-  },
-});
-
+const transporter = require("../config/nodemailer.js");
 router.post("/", (req, res) => {
   var mailOptions = {
     from: process.env.EMAIL,
@@ -19,7 +9,6 @@ router.post("/", (req, res) => {
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
-    console.log(process.env.PASSWORD);
     if (error) {
       res.status(500).send({ message: "Erreur du server" });
     } else {
