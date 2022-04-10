@@ -1,7 +1,7 @@
 const router = require("express").Router();
 require("dotenv").config();
 const transporter = require("../config/nodemailer.js");
-
+const database = require("../config/mongoose");
 const getDateTime = require("../function/datetime.js")();
 
 router.post("/", (req, res) => {
@@ -50,6 +50,12 @@ router.get("/confirmation", (req, res) => {
   const code = process.env.INSCRIPTION_CODE || "";
   const data = req.query;
   if (code != "" && data.code == process.env.INSCRIPTION_CODE) {
+    database(
+      () => {
+        console.log("Querying...");
+      },
+      () => {}
+    );
     res.send("Inscription confirmée");
   } else {
     res.send("Code erroné");
