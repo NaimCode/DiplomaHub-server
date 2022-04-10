@@ -14,6 +14,6 @@ const etablissementModel = new mongoose.Schema({
   dateInscription: { type: Date, default: Date.now },
 });
 
-const Etablissement = mongoose.model("Etablissement", etablissementModel);
+const Etablissement = mongoose.model("Etablissements", etablissementModel);
 
 module.exports = Etablissement;

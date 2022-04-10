@@ -6,7 +6,7 @@ const membreModel = new mongoose.Schema({
   prenom: String,
   password: {
     type: String,
-    default: crypto.randomBytes(10).toString("hex"),
+    default: crypto.randomBytes(5).toString("hex"),
   },
   email: { type: String, required: true, unique: true },
   etablissement_id: { type: mongoose.Schema.Types.ObjectId, required: true },
