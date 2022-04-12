@@ -2,11 +2,10 @@
 const express = require("express");
 const cors = require("cors");
 const InscriptionRouter = require("./routes/inscription");
-const mongoose = require("mongoose");
-const Etablissement = require("./Models/etablissement");
-const Membre = require("./Models/membre");
-require("dotenv").config();
+const ConnextionRouter = require("./routes/auth");
 const { decrypt } = require("./function/crypto");
+require("dotenv").config();
+const mongoose = require("mongoose");
 //Initialisation
 const app = express();
 app.use(cors());
@@ -31,3 +30,4 @@ app.get("/", (req, res) => res.send("Serveur en marche!"));
 
 //Activation des autres routers
 app.use("/inscription", InscriptionRouter);
+app.use("/auth", ConnextionRouter);
