@@ -1,12 +1,9 @@
-import { randomBytes, pbkdf2Sync } from "crypto";
+const Cryptr = require("cryptr");
+const crypto = require("crypto");
 require("dotenv").config();
-const password = process.env.CRYPTAGE_KEY;
-const cryptage = pbkdf2Sync(
-  password,
-  randomBytes(8).toString("hex"),
-  1000,
-  64,
-  "sha512"
-).toString("hex");
 
-module.exports = { cryptage };
+const cryptr = new Cryptr(process.env.CRYPTAGE_KEY);
+
+const encrypt = () => cryptr.encrypt(crypto.randomBytes(6).toString("hex"));
+const decrypt = (hash) => cryptr.decrypt(hash);
+module.exports = { encrypt, decrypt };

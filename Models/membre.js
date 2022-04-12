@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
-const crypto = require("crypto");
+const { encrypt, decrypt } = require("../function/crypto");
 
 const membreModel = new mongoose.Schema({
   nom: String,
   prenom: String,
   password: {
     type: String,
-    default: crypto.randomBytes(5).toString("hex"),
+    default: encrypt,
+    get: (v) => decrypt(v),
   },
   email: { type: String, required: true, unique: true },
   etablissement_id: { type: mongoose.Schema.Types.ObjectId, required: true },
