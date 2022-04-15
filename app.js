@@ -3,6 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const InscriptionRouter = require("./routes/inscription");
 const ConnextionRouter = require("./routes/auth");
+const EtablissementRouter = require("./routes/etablissement");
+const MembreRouter = require("./routes/membre");
 const { decrypt } = require("./function/crypto");
 require("dotenv").config();
 const mongoose = require("mongoose");
@@ -31,3 +33,5 @@ app.get("/", (req, res) => res.send("Serveur en marche!"));
 //Activation des autres routers
 app.use("/inscription", InscriptionRouter);
 app.use("/auth", ConnextionRouter);
+app.use("/membre", MembreRouter);
+app.use("/etablissement", EtablissementRouter);
