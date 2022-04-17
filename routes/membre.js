@@ -16,7 +16,6 @@ router.get("/:id", (req, res) => {
   });
 });
 router.put("/update/:id", async (req, res) => {
-  console.log(req.params.id);
   Membre.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
     if (user) {
       Object.assign(user, req.body);
