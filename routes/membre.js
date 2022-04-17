@@ -7,22 +7,29 @@ const router = require("express").Router();
 require("dotenv").config();
 
 router.get("/:id", (req, res) => {
-  Membre.findById(req.params.id, (err, mbr) => {
-    if (mbr) {
-      mbr.password = mbr.password;
-      res.status(200).send(JSON.stringify(mbr));
-    }
-    if (err) res.status(400).send({ error: "Membre indisponible" });
-  });
+  Membre.findById(req.params.id)
+    .populate("roles")
+    .populate("etablissement_id")
+    .exec((err, mbr) => {
+      if (mbr) {
+        mbr.password = mbr.password;
+
+        res.status(200).send(JSON.stringify(mbr));
+      }
+      if (err) res.status(400).send({ error: "Membre indisponible" });
+    });
 });
 router.put("/update/:id", async (req, res) => {
-  Membre.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
-    if (user) {
-      Object.assign(user, req.body);
+  Membre.findByIdAndUpdate(req.params.id, req.body)
+    .populate("roles")
+    .populate("etablissement_id")
+    .exec((err, user) => {
+      if (user) {
+        Object.assign(user, req.body);
 
-      res.status(200).send(JSON.stringify(user));
-    } else res.sendStatus(400);
-  });
+        res.status(200).send(JSON.stringify(user));
+      } else res.sendStatus(400);
+    });
 });
 
 router.post("/add", (req, res) => {
@@ -53,11 +60,20 @@ router.post("/add", (req, res) => {
             console.log(error);
             res.status(404).json({ error: "Erreur du server" });
           } else {
-            res.sendStatus(200);
+            res.status(200).send(JSON.stringify(mbr));
           }
         });
       });
     }
   });
+});
+
+router.get("/getAll/:eId", (req, res) => {
+  Membre.find({ etablissement_id: req.params.eId })
+    .populate("roles")
+    .exec((err, r) => {
+      if (err) res.sendStatus(404);
+      else res.status(200).send(r);
+    });
 });
 module.exports = router;

@@ -34,7 +34,7 @@ router.post("/add", (req, res) => {
 router.get("/getAll/:eId", (req, res) => {
   Role.find({ etablissement_id: req.params.eId }, (err, r) => {
     if (err) res.sendStatus(404);
-    else res.status(200).json(JSON.stringify(r));
+    else res.status(200).send(r);
   });
 });
 router.delete("/delete/:id", (req, res) => {
