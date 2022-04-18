@@ -2,6 +2,7 @@ const { json } = require("express");
 const transporter = require("../config/nodemailer");
 const Etablissement = require("../Models/etablissement");
 const Membre = require("../Models/membre");
+const Role = require("../Models/role");
 
 const router = require("express").Router();
 require("dotenv").config();
@@ -33,7 +34,7 @@ router.put("/update/:id", async (req, res) => {
 });
 
 router.post("/add", (req, res) => {
-  Membre.findOne({ email: req.body.email }, (err, mbr) => {
+  Membre.findOne({ email: req.body.email }, async (err, mbr) => {
     if (mbr) res.status(404).json({ error: "Email déjà utilisé" });
     else {
       const m = new Membre(req.body);
@@ -41,6 +42,7 @@ router.post("/add", (req, res) => {
         const etablissement = await Etablissement.findById(
           mbr.etablissement_id
         );
+
         var mailOptions = {
           from: process.env.EMAIL,
           to: mbr.email,
@@ -57,10 +59,9 @@ router.post("/add", (req, res) => {
         };
         transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
-            console.log(error);
             res.status(404).json({ error: "Erreur du server" });
           } else {
-            res.status(200).send(JSON.stringify(mbr));
+            res.status(200).send(JSON.stringify(doc));
           }
         });
       });

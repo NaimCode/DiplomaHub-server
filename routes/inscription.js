@@ -4,6 +4,7 @@ const transporter = require("../config/nodemailer.js");
 const database = require("../config/mongoose");
 const Etablissement = require("../Models/etablissement.js");
 const Membre = require("../Models/membre.js");
+const Role = require("../Models/role.js");
 const getDateTime = require("../function/datetime.js")();
 
 router.post("/", (req, res) => {
@@ -60,11 +61,26 @@ router.get("/confirmation", (req, res) => {
       } else {
         delete data.code;
         const e = Etablissement(data);
-        e.save().then((savedDoc) => {
+        e.save().then(async (savedDoc) => {
           if (savedDoc === e) {
+            const mRole = ["Affichage", "Création", "Suppression"];
+            const eRole = ["Affichage", "Importation", "Certification"];
+            const rRole = ["Affichage", "Ajoût", "Suppression"];
+            const etRole = ["Affichage", "Modification"];
+            const r = await new Role({
+              intitule: "Super Admin",
+              description: "Il a tous les privilèges",
+              etablissement: etRole,
+              role: rRole,
+              etudiant: eRole,
+              membre: mRole,
+              etablissement_id: savedDoc._id,
+            }).save();
+
             Membre({
               email: savedDoc.email,
               etablissement_id: savedDoc._id,
+              roles: [r._id],
             })
               .save()
               .then((mbr) => {
