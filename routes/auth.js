@@ -3,7 +3,7 @@ const Membre = require("../Models/membre");
 const router = require("express").Router();
 require("dotenv").config();
 
-router.post("/", (req, res) => {
+router.post("/", function (req, res) {
   const data = req.body;
   if (data.isMember) {
     Membre.findOne({ email: data.email }, (err, mbr) => {

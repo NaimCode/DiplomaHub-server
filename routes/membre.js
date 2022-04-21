@@ -61,7 +61,7 @@ router.post("/add", (req, res) => {
           if (error) {
             res.status(404).json({ error: "Erreur du server" });
           } else {
-            res.status(200).send(JSON.stringify(doc));
+            res.sendStatus(200);
           }
         });
       });
@@ -69,6 +69,12 @@ router.post("/add", (req, res) => {
   });
 });
 
+router.put("/update/roles/:id", (req, res) => {
+  Membre.findByIdAndUpdate(req.params.id, req.body, (err) => {
+    if (!err) res.sendStatus(200);
+    else res.sendStatus(400);
+  });
+});
 router.get("/getAll/:eId", (req, res) => {
   Membre.find({ etablissement_id: req.params.eId })
     .populate("roles")
@@ -76,5 +82,11 @@ router.get("/getAll/:eId", (req, res) => {
       if (err) res.sendStatus(404);
       else res.status(200).send(r);
     });
+});
+router.delete("/delete/:id", (req, res) => {
+  Membre.findByIdAndDelete(req.params.id, (err) => {
+    if (err) res.sendStatus(400);
+    else res.sendStatus(200);
+  });
 });
 module.exports = router;
