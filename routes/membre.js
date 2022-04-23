@@ -78,6 +78,7 @@ router.put("/update/roles/:id", (req, res) => {
 router.get("/getAll/:eId", (req, res) => {
   Membre.find({ etablissement_id: req.params.eId })
     .populate("roles")
+    .sort({ date: -1 })
     .exec((err, r) => {
       if (err) res.sendStatus(404);
       else res.status(200).send(r);

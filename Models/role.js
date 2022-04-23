@@ -9,6 +9,7 @@ const roleModel = new mongoose.Schema({
   membre: [String],
   etudiant: [String],
   role: [String],
+  date: { type: Date, default: Date.now },
 });
 
 const Role = mongoose.model("Role", roleModel);

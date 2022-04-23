@@ -17,6 +17,7 @@ const membreModel = new mongoose.Schema({
     ref: "Etablissements",
   },
   roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Role" }],
+  date: { type: Date, default: Date.now },
 });
 
 const Membre = mongoose.model("Membre", membreModel);
