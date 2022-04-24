@@ -6,6 +6,7 @@ const etablissementModel = new mongoose.Schema({
   nom: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   num: String,
+
   emplacement: {
     pays: String,
     ville: String,
