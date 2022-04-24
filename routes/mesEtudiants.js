@@ -32,4 +32,14 @@ router.post("/add", (req, res) => {
     });
 });
 
+router.post("/addAll", (req, res) => {
+  MesEtudiants.insertMany(req.body)
+    .then(function (list) {
+      res.status(200).json(list); // Success
+    })
+    .catch(function (error) {
+      res.sendStatus(400); // Failure
+    });
+});
+
 module.exports = router;

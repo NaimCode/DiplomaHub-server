@@ -4,8 +4,12 @@ const etudiantModel = new mongoose.Schema({
   email: String,
   nom: String,
   prenom: String,
-  diplome: mongoose.Schema.Types.ObjectId,
   etablissement_id: mongoose.Schema.Types.ObjectId,
+  diplome: mongoose.Schema.Types.ObjectId,
+  doc: {
+    hash: String,
+    link: String,
+  },
   date: { type: Date, default: Date.now },
 });
 
