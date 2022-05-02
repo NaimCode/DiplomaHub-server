@@ -5,8 +5,18 @@ const MesEtudiants = require("../Models/mesEtudiant");
 const router = require("express").Router();
 require("dotenv").config();
 
-router.get("/getAll/:id", (req, res) => {
-  MesEtudiants.find({ etablissement_id: req.params.id })
+router.get("/getAll/1/:id", (req, res) => {
+  MesEtudiants.find({
+    etablissement_id: req.params.id,
+  })
+    .sort("-date")
+    .exec((err, e) => {
+      if (e) res.status(200).send(JSON.stringify(e.filter((e) => !e.hash)));
+      if (err) res.status(200).send([]);
+    });
+});
+router.get("/getAll/2/:id", (req, res) => {
+  MesEtudiants.find({ etablissement_id: req.params.id, hash: { $ne: null } })
     .sort("-date")
     .exec((err, e) => {
       if (e) res.status(200).send(JSON.stringify(e));
@@ -42,4 +52,9 @@ router.post("/addAll", (req, res) => {
     });
 });
 
+router.put("/setDiplomeHash/:id", (req, res) => {
+  MesEtudiants.findByIdAndUpdate(req.params.id, { hash: req.body.hash })
+    .then((v) => res.sendStatus(200))
+    .catch((err) => res.sendStatus(400));
+});
 module.exports = router;

@@ -6,10 +6,7 @@ const etudiantModel = new mongoose.Schema({
   prenom: String,
   etablissement_id: mongoose.Schema.Types.ObjectId,
   diplome: mongoose.Schema.Types.ObjectId,
-  doc: {
-    hash: String,
-    link: String,
-  },
+  hash: String,
   date: { type: Date, default: Date.now },
 });
 
