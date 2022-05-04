@@ -5,8 +5,9 @@ const etudiantModel = new mongoose.Schema({
   nom: String,
   prenom: String,
   etablissement_id: mongoose.Schema.Types.ObjectId,
-  diplome: mongoose.Schema.Types.ObjectId,
+  diplome: { type: mongoose.Schema.Types.ObjectId, ref: "Diplomes" },
   hash: String,
+  intitule: String,
   date: { type: Date, default: Date.now },
 });
 

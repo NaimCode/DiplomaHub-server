@@ -118,13 +118,4 @@ router.get("/confirmation", (req, res) => {
   }
 });
 
-router.get("/test", (req, res) => {
-  Etablissement.findById("625357fa4f522b33f672efcc", (err, docs) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Result : ", docs);
-    }
-  });
-});
 module.exports = router;

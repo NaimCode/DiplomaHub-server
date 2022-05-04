@@ -5,6 +5,23 @@ const MesEtudiants = require("../Models/mesEtudiant");
 const router = require("express").Router();
 require("dotenv").config();
 
+router.get("/get/:id", (req, res) => {
+  MesEtudiants.findById(req.params.id)
+    .then((e) => {
+      if (e) {
+        Etablissement.findById(e.etablissement_id)
+          .then((eta) => {
+            if (eta)
+              res
+                .status(200)
+                .send(JSON.stringify({ ...e, etablissement: eta }));
+            else res.status(400).send("error");
+          })
+          .catch((err) => res.status(400).send("error"));
+      } else res.status(400).send("error");
+    })
+    .catch((err) => res.status(400).send("error"));
+});
 router.get("/getAll/1/:id", (req, res) => {
   MesEtudiants.find({
     etablissement_id: req.params.id,
@@ -18,6 +35,15 @@ router.get("/getAll/1/:id", (req, res) => {
 router.get("/getAll/2/:id", (req, res) => {
   MesEtudiants.find({ etablissement_id: req.params.id, hash: { $ne: null } })
     .sort("-date")
+    .exec((err, e) => {
+      if (e) res.status(200).send(JSON.stringify(e.filter((e) => !e.diplome)));
+      if (err) res.status(200).send([]);
+    });
+});
+router.get("/getAll/3/:id", (req, res) => {
+  MesEtudiants.find({ etablissement_id: req.params.id, diplome: { $ne: null } })
+    .sort("-date")
+    .populate("diplome")
     .exec((err, e) => {
       if (e) res.status(200).send(JSON.stringify(e));
       if (err) res.status(200).send([]);
@@ -53,7 +79,10 @@ router.post("/addAll", (req, res) => {
 });
 
 router.put("/setDiplomeHash/:id", (req, res) => {
-  MesEtudiants.findByIdAndUpdate(req.params.id, { hash: req.body.hash })
+  MesEtudiants.findByIdAndUpdate(req.params.id, {
+    hash: req.body.hash,
+    intitule: req.body.intitule,
+  })
     .then((v) => res.sendStatus(200))
     .catch((err) => res.sendStatus(400));
 });

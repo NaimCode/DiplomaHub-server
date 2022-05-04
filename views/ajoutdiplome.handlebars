@@ -3,15 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Félicitation</title>
+    <title>Diplôme certifié</title>
 
    
 </head>
 <body>
     <div class="flex flex-col items-center justify-center bg-[#f5f8fa] px-3 py-4">
         <a
-           href={{frontendUrl}}
-         
+          href={{frontendUrl}}
           target="_blank"
           class="text-darker text-3xl text-center py-10 font-bold"
         >
@@ -19,27 +18,22 @@
         </a>
         <div class=" w-full max-w-xl bg-white rounded-md shadow-md flex flex-col p-7 gap-2 text-center">
           <p>
-           Félicitation  votre demande d'inscription de l'établissement <strong>{{nom}} </strong>a été approuvée, veuillez trouver ci-joint les informations nécessaire pour vous connecter. N'oublier pas de modifier votre <strong>nom</strong> et <strong>prénom</strong> en tant que administrateur
-          </p>
+           Bonjour <strong>{{nomEtudiant}}</strong> un diplôme a été certifié avec votre nom par l'établissement <strong>{{nom}}</strong></p>
           <hr class="my-5" />
   
           <div>
-            <p class="text-sm">Email/Identifiant</p>
-            <strong class="text-lg font-semibold">{{email}}</strong>
+            <p class="text-sm">Hash</p>
+            <strong class="text-lg font-semibold">{{hash}}</strong>
           </div>
-          <div>
-            <p class="text-sm">Mot de passe</p>
-            <strong class="text-lg font-semibold">
-             {{password}}
-            </strong>
-          </div>
+          
           <hr class="my-5" />
-            <button
-             
-              class="w-full mt-4  text-sm shadow-md text-white px-3 py-2  uppercase rounded-sm"
-            >
-              <a href={{frontendUrl}}>Connexion</a> 
-            </button>
+            <a
+          href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{hash}}"
+          target="_blank"
+         
+        >
+       <span class="codeQr"> Obtenir mon code QR</span>
+        </a>
           </form>
         </div>
 
@@ -57,7 +51,17 @@ body, html{
 p{
   --tw-text-opacity: 0.7 !important;
 }
+.codeQr{
+  padding-top: 0.75rem;
+padding-bottom: 0.75rem; 
+padding-left: 1rem;
+padding-right: 1rem; 
+background-color: #2563EB; 
+color: #ffffff; 
+border-radius: 0.125rem; 
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
 
+}
 button{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(25 118 210 / var(--tw-bg-opacity)) !important;
