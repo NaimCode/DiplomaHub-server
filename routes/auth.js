@@ -1,5 +1,5 @@
 const Membre = require("../Models/membre");
-
+const Etudiant = require("../Models/etudiant");
 const router = require("express").Router();
 require("dotenv").config();
 
@@ -10,7 +10,7 @@ router.post("/", function (req, res) {
       if (mbr) {
         if (mbr.password == data.password) {
           mbr.password = mbr.password;
-          res.status(200).send(JSON.stringify(mbr));
+          res.status(200).json({ user: mbr, isMembre: true });
         } else {
           res.status(400).json({ error: "Mot de passe invalide" });
         }
@@ -19,9 +19,18 @@ router.post("/", function (req, res) {
       }
     });
   } else {
-    res
-      .status(400)
-      .json({ error: "Etudiant n'est pas pris en charge pour le moment" });
+    Etudiant.findOne({ email: data.email })
+      .then((e) => {
+        if (e) {
+          if (e.password == data.password) {
+            e.password = e.password;
+            res.status(200).json({ user: e, isMembre: false });
+          } else {
+            res.status(400).json({ error: "Mot de passe invalide" });
+          }
+        } else res.status(400).json({ error: "Email invalide" });
+      })
+      .catch((err) => res.status(400).json({ error: "Erreur du serveur" }));
   }
 });
 
