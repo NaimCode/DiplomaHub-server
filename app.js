@@ -12,7 +12,7 @@ const CertificationRouter = require("./routes/certification");
 const { decrypt } = require("./function/crypto");
 require("dotenv").config();
 const mongoose = require("mongoose");
-
+const path = require("path");
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -26,14 +26,11 @@ mongoose
 //Le port accordé au serveur
 const PORT = 4000;
 
-
 app.listen(PORT, () =>
   console.log(`Le serveur est en écoute sur le port ${PORT}`)
 );
 
-
-app.get("/", (req, res) => res.send("Serveur en marche!"));
-
+app.get("/", (req, res) => res.sendFile(path.join(__dirname + "/index.html")));
 
 app.use("/inscription", InscriptionRouter);
 app.use("/auth", ConnextionRouter);
