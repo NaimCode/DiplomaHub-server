@@ -24,7 +24,7 @@ mongoose
   .then((v) => console.log("Base de donnée en marche..."))
   .catch(() => console.log("Impossible d'atteindre la base de donnée "));
 //Le port accordé au serveur
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () =>
   console.log(`Le serveur est en écoute sur le port ${PORT}`)
