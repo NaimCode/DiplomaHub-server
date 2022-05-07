@@ -4,10 +4,12 @@ const router = require("express").Router();
 require("dotenv").config();
 
 router.get("/getAll/:eid", (req, res) => {
-  Diplome.find({ etablissement: req.params.eid }, (ds) => {
-    if (ds) res.status(200).send(ds);
-    else res.status(200).send([]);
-  });
+  Diplome.find({ etablissement: req.params.eid })
+    .populate("etudiant")
+    .exec((err, ds) => {
+      if (ds) res.status(200).send(ds);
+      else res.status(200).send([]);
+    });
 });
 
 router.get("/get/all/:id", (req, res) => {
