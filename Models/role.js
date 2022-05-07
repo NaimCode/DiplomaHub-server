@@ -5,7 +5,6 @@ const roleModel = new mongoose.Schema({
   etablissement_id: mongoose.Schema.Types.ObjectId,
   intitule: String,
   description: String,
-  transaction: [String],
   membre: [String],
   etudiant: [String],
   role: [String],
